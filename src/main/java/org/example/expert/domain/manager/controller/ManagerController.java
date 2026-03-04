@@ -1,5 +1,6 @@
 package org.example.expert.domain.manager.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.annotation.Auth;
@@ -24,9 +25,11 @@ public class ManagerController {
     public ResponseEntity<ManagerSaveResponse> saveManager(
             @AuthenticationPrincipal AuthUser authUser,
             @PathVariable long todoId,
-            @Valid @RequestBody ManagerSaveRequest managerSaveRequest
+            @Valid @RequestBody ManagerSaveRequest managerSaveRequest,
+            HttpServletRequest request
     ) {
-        return ResponseEntity.ok(managerService.saveManager(authUser, todoId, managerSaveRequest));
+        String uri = request.getRequestURI();
+        return ResponseEntity.ok(managerService.saveManager(authUser, todoId, managerSaveRequest, uri));
     }
 
     @GetMapping("/todos/{todoId}/managers")
