@@ -19,4 +19,5 @@ public interface TodoRepository extends JpaRepository<Todo, Long>, TodoCustomRep
             "AND (:endDate IS NULL OR t.modifiedAt <= :endDate)" +
             "ORDER BY t.modifiedAt DESC")
     Page<Todo> findAllByOrderWithModifiedAtAndWeather(LocalDateTime startDate, LocalDateTime endDate, String weather, Pageable pageable);
+
 }
